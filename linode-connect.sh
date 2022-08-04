@@ -1,7 +1,5 @@
 #!/bin/bash
-
-
-USER='trevor'
+# A script to create, remove, and check the status of SSH tunnels needed for securely VPCing to Linode servers
 
 
 function main_menu() {
@@ -23,7 +21,7 @@ function main_menu() {
 
 
 function error_check() {
-        # An error checking function to see if phases worked successfully
+        # An error checking function to see if commands worked successfully
         if [ $1 -ne 0 ]; then
                 echo "[!] Error with:" $2
                 exit 1
@@ -31,7 +29,7 @@ function error_check() {
 }
 
 
-# Processes String
+# Commands String
 CREATE_STR="Creating SSH tunnel"
 REMOVE_STR="Removing SSH tunnel"
 STATUS_STR="Checking SSH tunnel status"
@@ -50,7 +48,7 @@ do
 			ssh -L 61000:localhost:5901 -N -f ${USER}@23.239.22.152
 			CREATE_CHK="$?"
 			error_check $CREATE_CHK $CREATE_STR
-			echo "[+] SSH tunnel successfully created"
+			echo "[+] SSH tunnel successfully created!"
 			echo ""
 			;;
 		2)
@@ -58,7 +56,7 @@ do
 			kill $(ps aux | grep "61000:localhost:5901" | grep "Ss" | awk "{print $2}") &>/dev/null
 			REMOVE_CHK="$?"
 			error_check $REMOVE_CHK $REMOVE_STR
-			echo "[+] SSH tunnel successfully removed"
+			echo "[+] SSH tunnel successfully removed!"
 			echo ""
 			;;
 		3)
@@ -66,10 +64,10 @@ do
 			ps aux | grep "61000:localhost:5901" | grep "Ss" &>/dev/null
 			STATUS_CHK="$?"
 			if [ $STATUS_CHK -eq 0 ]; then
-				echo "[+] SSH tunnel is up"
+				echo "[+] SSH tunnel is up!"
 				echo ""
 			else
-				echo "[-] SSH tunnel is down"
+				echo "[-] SSH tunnel is down!"
 				echo ""
 			fi
 			;;
