@@ -6,7 +6,6 @@ function main_menu() {
 	# Main Menu
 	echo ""
 	echo "[*] Linode Connect"
-	echo "[*] OS: Kali Linux"
 	echo "[*] IP: ${IP_ADDR}"
 	echo "[*] User: ${USER}"
 	echo ""
@@ -49,6 +48,7 @@ do
 			CREATE_CHK="$?"
 			error_check $CREATE_CHK $CREATE_STR
 			echo "[+] SSH tunnel successfully created!"
+			echo "[*] You can now VPC to the instance using localhost:61000"
 			echo ""
 			;;
 		2)
