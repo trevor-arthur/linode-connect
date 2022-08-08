@@ -14,6 +14,7 @@ function main_menu() {
 	echo "[2] Remove SSH tunnel"
 	echo "[3] Check SSH tunnel status"
 	echo "[h] Display the Main Menu"
+	echo "[c] Clear the screen"
 	echo "[q] Quit"
 	echo ""
 }
@@ -49,6 +50,10 @@ do
 			error_check $CREATE_CHK $CREATE_STR
 			echo "[+] SSH tunnel successfully created!"
 			echo "[*] You can now VPC to the instance using localhost:61000"
+                        if [ -d /Applications/*VNC* ]; then
+                                echo "[*] Starting VNC application..."
+                                open /Applications/*VNC*
+                        fi
 			echo ""
 			;;
 		2)
@@ -73,6 +78,9 @@ do
 			;;
 		h)
 			main_menu
+			;;
+		c)
+			clear
 			;;
 		q)
 			echo "[*] Goodbye!"
